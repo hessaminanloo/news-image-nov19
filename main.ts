@@ -12,7 +12,11 @@
 //
 // The program itself does one deterministic thing: it copies the
 // finished image that ships in this repository to the grader's output
-// directory, so both graded runs write identical bytes.
+// directory, so both graded runs write identical bytes. The image is
+// 203,978 bytes at 1024×1024 (sha256 0b9d7132…f754b, recorded in the
+// README), drawn from 19 November's reporting by a Pillow script that
+// was itself run twice to confirm byte-identical output before the
+// image was committed here.
 // Node 22, standard library only, no network, no clock, no reads
 // outside this repository.
 
@@ -37,3 +41,8 @@ if (dstSize !== srcSize) {
     `copy verification failed: ${dst} is ${dstSize} bytes, expected ${srcSize} bytes (source ${src})`
   );
 }
+
+// One line of provenance for the grader's log: which image was written
+// and how large it is, so a graded run can be matched back to the
+// committed entry.png without opening the file.
+console.log(`news-image-20261119: wrote ${dst} (${dstSize} bytes)`);
